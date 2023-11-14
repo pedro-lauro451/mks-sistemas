@@ -1,22 +1,35 @@
 // CartContext.tsx
 import React, { createContext, useContext, useState } from 'react';
 
-type CartContextType = {
-  isCartVisible: boolean;
-  toggleCartVisibility: () => void;
-};
+const CartContext = createContext(null);
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
-
-export const CartProvider: React.FC = ({ children }) => {
+export const CartProvider = ({ children }) => {
   const [isCartVisible, setCartVisibility] = useState(false);
 
   const toggleCartVisibility = () => {
     setCartVisibility((prev) => !prev);
   };
 
+  const [cartItems, setCartItems] = useState([]);
+
+  const addToCart = (product) => {
+    if(!cartItems.some((item) => item.id === product.id)) {
+        setCartItems((prevItems) => [...prevItems, product]);
+    }
+  };
+
+  const removeFromCart = (productId) => {
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
+  };
+
   return (
-    <CartContext.Provider value={{ isCartVisible, toggleCartVisibility }}>
+    <CartContext.Provider value={{
+      isCartVisible,
+      toggleCartVisibility,
+      cartItems,
+      addToCart,
+      removeFromCart
+    }}>
       {children}
     </CartContext.Provider>
   );
@@ -24,8 +37,5 @@ export const CartProvider: React.FC = ({ children }) => {
 
 export const useCart = () => {
   const context = useContext(CartContext);
-  if (!context) {
-    throw new Error('useCart must be used within a CartProvider');
-  }
   return context;
 };

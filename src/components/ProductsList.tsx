@@ -1,8 +1,9 @@
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { fetchProducts, Product } from '../api/api'
+import { fetchProducts } from '../api/api'
 import styled from 'styled-components'
 import StoreProduct from './Product'
+import { useCart } from './CartContext'
 
 const ProductsContainer = styled.div`
     display: flex;
@@ -15,7 +16,9 @@ const ProductsContainer = styled.div`
 
 const ProductsList = () => {
 
-    const { data, error, isLoading } = useQuery<Product[], Error>({
+    const { addToCart } = useCart();
+
+    const { data, error, isLoading } = useQuery({
         queryKey: ['products'],
         queryFn: fetchProducts
     });
@@ -36,7 +39,8 @@ const ProductsList = () => {
                         name={product.name} 
                         price={product.price}
                         description={product.description}
-                        photo={product.photo}/>
+                        photo={product.photo}
+                        addToCart={() => addToCart(product)}/>
                 ))}
             </ProductsContainer>
         </>

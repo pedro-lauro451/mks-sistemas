@@ -60,11 +60,18 @@ const TotalsContainer = styled.div`
 
 const FlexContainer = styled.div`
     display:flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-left: auto;
+    padding-right: auto;
+    overflow-y: scroll;
+    max-height: 400px;
 `;
 
-const CartSidebar: React.FC = () => {
-    const { isCartVisible, toggleCartVisibility } = useCart();
+const CartSidebar = (props: any) => {
+    const { isCartVisible,
+        toggleCartVisibility,
+        cartItems } = useCart();
     return (
         <SidebarContainer style={{ display: isCartVisible ? 'initial' : 'none' }}>
             <SidebarContent>
@@ -73,7 +80,12 @@ const CartSidebar: React.FC = () => {
                     <h1 onClick={toggleCartVisibility}>X</h1>
                 </TotalsContainer>
                 <FlexContainer>
-                    <ProductInCart />
+                    {cartItems.map((item) => (
+                        <ProductInCart key={item.id} 
+                        name={item.name}
+                        photo={item.photo}
+                        price={item.price} />
+                    ))}
                 </FlexContainer>
                 <TotalsContainer>
                     <h1>Total</h1>

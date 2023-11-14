@@ -85,7 +85,7 @@ const FlexContainer = styled.div`
   }
 `;
 
-const StoreProduct = (props) => {
+const StoreProduct = (props: any) => {
 
   return (
     <ProductBox>
@@ -102,7 +102,7 @@ const StoreProduct = (props) => {
         <p>{props.description}</p>
       </PaddingBox>
 
-      <PurchaseButton onClick={() => console.log(props.name)}>
+      <PurchaseButton onClick={props.addToCart}>
         Comprar
       </PurchaseButton>
     </ProductBox>

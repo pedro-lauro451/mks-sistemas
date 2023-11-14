@@ -27,7 +27,7 @@ const CartAmountContainer = styled.div`
     }
 `;
 
-const CartAmount: React.FC = () => {
+const CartAmount = () => {
     const { toggleCartVisibility } = useCart();
     return (
         <CartAmountContainer onClick={toggleCartVisibility}>
