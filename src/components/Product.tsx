@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useCart } from './CartContext';
 
 const ProductBox = styled.div`
   border-radius: 8px;
@@ -87,6 +88,10 @@ const FlexContainer = styled.div`
 
 const StoreProduct = (props: any) => {
 
+  const addProduct = () => {
+    props.addToCart();
+  };
+
   return (
     <ProductBox>
       <img src={props.photo}></img>
@@ -102,7 +107,7 @@ const StoreProduct = (props: any) => {
         <p>{props.description}</p>
       </PaddingBox>
 
-      <PurchaseButton onClick={props.addToCart}>
+      <PurchaseButton onClick={() => addProduct()}>
         Comprar
       </PurchaseButton>
     </ProductBox>

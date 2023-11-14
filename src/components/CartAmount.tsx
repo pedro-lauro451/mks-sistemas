@@ -24,16 +24,19 @@ const CartAmountContainer = styled.div`
         font-weight: 700;
         line-height: normal; 
         margin-left: 1em;
+        -webkit-user-select: none;
+        -ms-user-select: none; 
+        user-select: none;
     }
 `;
 
 const CartAmount = () => {
-    const { toggleCartVisibility } = useCart();
+    const { toggleCartVisibility, cartItems } = useCart();
     return (
         <CartAmountContainer onClick={toggleCartVisibility}>
             <Image src='/cart.png' alt='Cart Image'
                 width={19} height={18} quality={100} />
-            <span>0</span>
+            <span>{cartItems.length}</span>
         </CartAmountContainer>
     )
 }

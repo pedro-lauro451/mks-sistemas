@@ -1,4 +1,6 @@
-import React from 'react'
+"use client";
+
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useCart } from './CartContext';
 import ProductInCart from './ProductInCart';
@@ -12,6 +14,10 @@ const SidebarContainer = styled.div`
     height: 100%;
     z-index: 1;
     display: none;
+    @media (max-width: 991px) {
+        width: 100%;
+        height: 100vh;
+    }
 `;
 
 const SidebarContent = styled.div`
@@ -39,6 +45,8 @@ const SidebarContent = styled.div`
         font-style: normal;
         font-weight: 700;
         line-height: 15px; 
+        position: absolute;
+        bottom: 0;
     }
 `;
 
@@ -56,6 +64,19 @@ const TotalsContainer = styled.div`
         line-height: normal; 
         margin: 0;
     }
+
+    & .closeIcon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #000;
+        border-radius: 20px;
+        width: 38px;
+        height: 38px; 
+        padding: 0;
+        margin-top: 0.9em;
+        font-weight: 400;
+    }
 `;
 
 const FlexContainer = styled.div`
@@ -71,25 +92,29 @@ const FlexContainer = styled.div`
 const CartSidebar = (props: any) => {
     const { isCartVisible,
         toggleCartVisibility,
-        cartItems } = useCart();
+        cartItems,
+        purchaseTotal } = useCart();
+
     return (
         <SidebarContainer style={{ display: isCartVisible ? 'initial' : 'none' }}>
             <SidebarContent>
                 <TotalsContainer>
                     <h1>Carrinho de Compras</h1>
-                    <h1 onClick={toggleCartVisibility}>X</h1>
+                    <h1 className="closeIcon" onClick={toggleCartVisibility}>X</h1>
                 </TotalsContainer>
                 <FlexContainer>
                     {cartItems.map((item) => (
                         <ProductInCart key={item.id} 
                         name={item.name}
                         photo={item.photo}
-                        price={item.price} />
+                        price={item.price} 
+                        id={item.id}
+                        />
                     ))}
                 </FlexContainer>
                 <TotalsContainer>
                     <h1>Total</h1>
-                    <h1>R$0</h1>
+                    <h1>R${purchaseTotal}</h1>
                 </TotalsContainer>
                 <button>Finalizar Compra</button>
             </SidebarContent>

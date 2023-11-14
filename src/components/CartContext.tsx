@@ -6,15 +6,17 @@ const CartContext = createContext(null);
 export const CartProvider = ({ children }) => {
   const [isCartVisible, setCartVisibility] = useState(false);
 
+  const [cartItems, setCartItems] = useState([]);
+
+  const [purchaseTotal, setPurchaseTotal] = useState(0);
+
   const toggleCartVisibility = () => {
     setCartVisibility((prev) => !prev);
   };
 
-  const [cartItems, setCartItems] = useState([]);
-
   const addToCart = (product) => {
-    if(!cartItems.some((item) => item.id === product.id)) {
-        setCartItems((prevItems) => [...prevItems, product]);
+    if (!cartItems.some((item) => item.id === product.id)) {
+      setCartItems((prevItems) => [...prevItems, product]);
     }
   };
 
@@ -28,7 +30,8 @@ export const CartProvider = ({ children }) => {
       toggleCartVisibility,
       cartItems,
       addToCart,
-      removeFromCart
+      removeFromCart,
+      purchaseTotal
     }}>
       {children}
     </CartContext.Provider>
