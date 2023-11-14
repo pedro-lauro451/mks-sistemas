@@ -8,9 +8,10 @@ const ProductBox = styled.div`
   font-family: 'Montserrat', sans-serif;
   color: #2C2C2C;
   font-style: normal;
-  width: 217px;
-  height: 285px; 
-  padding: 1em;
+  width: 227px;
+  height: 300px; 
+  margin-top: 1em;
+  position: relative;
 
   & h1 {
     font-size: 16px;
@@ -25,7 +26,30 @@ const ProductBox = styled.div`
     font-weight: 300;
     line-height: 12px;
   }
+
+  & img {
+    height: 139px; 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+  }
 `;
+
+const PurchaseButton = styled.button`
+  border-radius: 0px 0px 8px 8px;
+  background: #0F52BA;
+  border-color: #0F52BA;  
+  color: #FFF;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 18px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  `;
 
 const PriceTag = styled.div`
   border-radius: 10px;
@@ -45,6 +69,11 @@ const PriceTag = styled.div`
   }
 `;
 
+const PaddingBox = styled.div`
+  padding-left: 1em;
+  padding-right: 1em;
+`;
+
 const FlexContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -55,18 +84,27 @@ const FlexContainer = styled.div`
     width: 50%;
   }
 `;
+
 const StoreProduct = (props) => {
+
   return (
     <ProductBox>
-      <FlexContainer>
-        <div>
-          <h1>{props.name}</h1>
-        </div>
-        <PriceTag>
-          <h1>R$ {props.price}</h1>
-        </PriceTag>
-      </FlexContainer>
-      <p>{props.description}</p>
+      <img src={props.photo}></img>
+      <PaddingBox>
+        <FlexContainer>
+          <div>
+            <h1>{props.name}</h1>
+          </div>
+          <PriceTag>
+            <h1>R${props.price.split(".")[0]}</h1>
+          </PriceTag>
+        </FlexContainer>
+        <p>{props.description}</p>
+      </PaddingBox>
+
+      <PurchaseButton onClick={() => console.log(props.name)}>
+        Comprar
+      </PurchaseButton>
     </ProductBox>
   )
 }

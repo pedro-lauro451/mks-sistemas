@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import CartAmount from './CartAmount';
 
 const StyledHeader = styled.div`
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat&family=Oswald&display=swap');
@@ -29,6 +30,7 @@ const Header = () => {
         <StyledHeader>
             <h1>MKS</h1>
             <p>Sistemas</p>
+            <CartAmount />
         </StyledHeader>
     )
 }

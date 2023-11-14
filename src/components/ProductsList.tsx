@@ -9,8 +9,8 @@ const ProductsContainer = styled.div`
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
-    margin-top: 5em;
-   
+    margin-top: 3em;
+    padding-bottom: 5em;
 `;
 
 const ProductsList = () => {
@@ -35,7 +35,8 @@ const ProductsList = () => {
                     <StoreProduct key={product.id}
                         name={product.name} 
                         price={product.price}
-                        description={product.description}/>
+                        description={product.description}
+                        photo={product.photo}/>
                 ))}
             </ProductsContainer>
         </>

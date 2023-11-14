@@ -6,6 +6,9 @@ const StyledFooter = styled.div`
 display: flex;
 justify-content: center;
 background: #EEE;
+position: absolute;
+bottom: 0;
+width: 100%;
 
 & span {
     color: #000;
