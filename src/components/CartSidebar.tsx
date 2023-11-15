@@ -1,6 +1,3 @@
-"use client";
-
-import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useCart } from './CartContext';
 import ProductInCart from './ProductInCart';
@@ -76,6 +73,10 @@ const TotalsContainer = styled.div`
         padding: 0;
         margin-top: 0.9em;
         font-weight: 400;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -ms-user-select: none; 
+        user-select: none;
     }
 `;
 
@@ -93,7 +94,7 @@ const CartSidebar = (props: any) => {
     const { isCartVisible,
         toggleCartVisibility,
         cartItems,
-        purchaseTotal } = useCart();
+        purchaseTotal } = useCart()!;
 
     return (
         <SidebarContainer style={{ display: isCartVisible ? 'initial' : 'none' }}>
@@ -103,7 +104,7 @@ const CartSidebar = (props: any) => {
                     <h1 className="closeIcon" onClick={toggleCartVisibility}>X</h1>
                 </TotalsContainer>
                 <FlexContainer>
-                    {cartItems.map((item) => (
+                    {(cartItems as any).map((item: any) => (
                         <ProductInCart key={item.id} 
                         name={item.name}
                         photo={item.photo}

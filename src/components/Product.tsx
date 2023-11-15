@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useCart } from './CartContext';
 
 const ProductBox = styled.div`
   border-radius: 8px;
