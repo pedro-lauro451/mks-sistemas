@@ -31,12 +31,12 @@ const CartAmountContainer = styled.div`
 `;
 
 const CartAmount = () => {
-    const { toggleCartVisibility, cartItems } = useCart();
+    const { toggleCartVisibility, cartItems } = useCart()!;
     return (
         <CartAmountContainer onClick={toggleCartVisibility}>
             <Image src='/cart.png' alt='Cart Image'
                 width={19} height={18} quality={100} />
-            <span>{cartItems.length}</span>
+            <span>{(cartItems as any).length}</span>
         </CartAmountContainer>
     )
 }

@@ -3,7 +3,11 @@ import React, { createContext, useContext, useState } from 'react';
 
 const CartContext = createContext(null);
 
-export const CartProvider = ({ children }) => {
+interface CartProviderProps {
+  children: React.ReactNode;
+}
+
+export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [isCartVisible, setCartVisibility] = useState(false);
 
   const [cartItems, setCartItems] = useState([]);
@@ -14,14 +18,14 @@ export const CartProvider = ({ children }) => {
     setCartVisibility((prev) => !prev);
   };
 
-  const addToCart = (product) => {
-    if (!cartItems.some((item) => item.id === product.id)) {
-      setCartItems((prevItems) => [...prevItems, product]);
+  const addToCart = (product: any) => {
+    if (!cartItems.some((item: any) => item.id === product.id)) {
+      setCartItems((prevItems: any) => [...prevItems, product]);
     }
   };
 
-  const removeFromCart = (productId) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
+  const removeFromCart = (productId: any) => {
+    setCartItems((prevItems: any) => prevItems.filter((item: any) => item.id !== productId));
   };
 
   return (
